@@ -18,9 +18,9 @@
 
 
 
-        <title>:: I am Bo Gao's Homepage, Hello world::</title>
+        <title>:: autoeBay ::</title>
 
-		<link rel="shortcut icon" href="{% static "store/images/favicon.ico" %}" type="image/x-icon">
+		<link rel="shortcut icon" href="{% static "store/images/logo.png" %}" type="image/x-icon">
 
 
 
@@ -113,6 +113,8 @@
 
         <!-- main -->
 
+        <!-- xs (phones), sm (tablets), md (desktops), and lg (larger desktops) -->
+
         <main role="main-home-wrapper" class="container">
 
             <div class="row">
@@ -163,7 +165,7 @@
                 {% if itemList %}
 
                     {% for tlist in itemList %}
-                    <section class="col-xs-12 col-sm-3 col-md-3 col-lg-3 grid">
+                    <section class="col-xs-12 col-sm-6 col-md-3 col-lg-3 grid">
                         <ul class="grid-lod effect-2" id="grid">
 
                         {% for item in tlist %}
