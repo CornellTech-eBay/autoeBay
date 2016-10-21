@@ -61,21 +61,21 @@
         </script>
 
         <script>
-        /**
-        * Function that tracks a click on an outbound link in Analytics.
-        * This function takes a valid URL string as an argument, and uses that URL string
-        * as the event label. Setting the transport method to 'beacon' lets the hit be sent
-        * using 'navigator.sendBeacon' in browser that support it.
-        */
-        var trackOutboundLink = function(url) {
-           ga('send', 'event', 'outbound', 'click', url, {
-             'transport': 'beacon',
-             'hitCallback': function(){document.location = url;}
-           });
-        }
+            /**
+            * Function that tracks a click on an outbound link in Analytics.
+            * This function takes a valid URL string as an argument, and uses that URL string
+            * as the event label. Setting the transport method to 'beacon' lets the hit be sent
+            * using 'navigator.sendBeacon' in browser that support it.
+            */
+            var trackOutboundLink = function(url) {
+               ga('send', 'event', 'outbound', 'click', url, {
+                 'transport': 'beacon',
+                 'hitCallback': function(){document.location = url;}
+               });
+            }
         </script>
 
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
             function _gaLt(event) {
                 /* If GA is blocked or not loaded, or not main|middle|touch click then don't track */
                 if (!ga.hasOwnProperty("loaded") || ga.loaded != true || (event.which != 1 && event.which != 2)) {
@@ -132,7 +132,7 @@
             /* Attach the event to all clicks in the document after page has loaded */
             _w.addEventListener ? _w.addEventListener("load", function() {document.body.addEventListener(_gaLtEvt, _gaLt, !1)}, !1)
                 : _w.attachEvent && _w.attachEvent("onload", function() {document.body.attachEvent("on" + _gaLtEvt, _gaLt)});
-        </script>
+        </script> -->
 
 	</head>
 
@@ -256,7 +256,7 @@
                                 <figcaption>
                                         <h2> {{ item.title }} <span>Exhibition</span></h2>
                                         <!-- <p>Project for Thonik, design studio based in Amsterdam</p> -->
-                                        <a href= "{{ item.viewItemURL }}">View more</a>
+                                        <a href= "{{ item.viewItemURL }}" onclick="trackOutboundLink( '{{ item.viewItemURL }}' ); return false;">View more</a>
                                 </figcaption>
                             </figure>
                             <h4> {{ item.title }} </h4>
