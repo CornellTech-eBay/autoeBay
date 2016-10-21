@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from random import shuffle
 
 import pickle
+import csv
 
 
 def detail(request, question_id):
@@ -35,10 +36,27 @@ def getNestedList(itemDictList):
     return itemList
 
 
+def loadeBay(name):
+    eBayItemList = []
+    with open('./trendsData/' + name + '.csv', mode='r') as infile:
+        reader = csv.reader(infile)
+        keywordsList = next(reader)
+        for row in reader:
+            tdict = {}
+            for i in range(len(keywordsList)):
+                tdict[keywordsList[i]] = row[i]
+            eBayItemList.append(tdict)
+    return eBayItemList
+
+
 def index(request):
     itemDictList = load_obj('parsedData')
     itemList = getNestedList(itemDictList)
     shuffle(itemList)
+
+    eBayItemList = loadeBay('ebayHomePage')
+
+    itemList = itemList[0:10] + eBayItemList
 
     nitemList = []
     for i in range(4):
