@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from random import shuffle
 
 import pickle
 
@@ -31,15 +32,18 @@ def getNestedList(itemDictList):
             if (len(itemDictList[keyword]) > n):
                 itemList.append(itemDictList[keyword][n])
                 if len(itemList) == 20: break
+    return itemList
 
-    nitemList = []
-    for i in range(4):
-        nitemList.append(itemList[i*5:(i+1)*5])
-    return nitemList
 
 def index(request):
     itemDictList = load_obj('parsedData')
     itemList = getNestedList(itemDictList)
+    shuffle(itemList)
+
+    nitemList = []
+    for i in range(4):
+        nitemList.append(itemList[i*5:(i+1)*5])
+    itemList = nitemList
 
     context = {'itemList': itemList}
     return render(request, 'store/index.html', context)
