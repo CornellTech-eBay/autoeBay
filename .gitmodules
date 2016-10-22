@@ -1,0 +1,3 @@
+[submodule "trends4ebay"]
+	path = trends4ebay
+	url = https://github.com/CornellTech-eBay/trends4ebay.git

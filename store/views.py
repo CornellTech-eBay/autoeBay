@@ -29,10 +29,12 @@ def getNestedList(itemDictList):
     itemList = []
     n = 0
     while len(itemList) < 20:
+        tlen = len(itemList)
         for keyword in keywordsList:
             if (len(itemDictList[keyword]) > n):
                 itemList.append(itemDictList[keyword][n])
                 if len(itemList) == 20: break
+        if (tlen == len(itemList)): break
     return itemList
 
 
@@ -56,7 +58,7 @@ def index(request):
 
     eBayItemList = loadeBay('ebayHomePage')
 
-    itemList = itemList[0:10] + eBayItemList
+    itemList = itemList[0:min(10, len(itemList))] + eBayItemList
 
     nitemList = []
     for i in range(4):
