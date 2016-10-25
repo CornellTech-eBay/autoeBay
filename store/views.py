@@ -24,7 +24,7 @@ def load_obj(name):
     with open('./trendsData/' + name + '.pkl', 'rb') as f:
         return pickle.load(f)
 
-def getNestedList(itemDictList):
+def getItemList(itemDictList):
     keywordsList = itemDictList["keywordsList"]
     itemList = []
     n = 0
@@ -35,6 +35,7 @@ def getNestedList(itemDictList):
                 itemList.append(itemDictList[keyword][n])
                 if len(itemList) == 20: break
         if (tlen == len(itemList)): break
+        n = n + 1
     return itemList
 
 
@@ -53,12 +54,13 @@ def loadeBay(name):
 
 def index(request):
     itemDictList = load_obj('parsedData')
-    itemList = getNestedList(itemDictList)
-    shuffle(itemList)
+    itemList = getItemList(itemDictList)
 
     eBayItemList = loadeBay('ebayHomePage')
 
     itemList = itemList[0:min(10, len(itemList))] + eBayItemList
+
+    shuffle(itemList)
 
     nitemList = []
     for i in range(4):
