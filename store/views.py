@@ -58,9 +58,11 @@ def index(request):
 
     eBayItemList = loadeBay('ebayHomePage')
 
-    itemList = itemList[0:min(10, len(itemList))] + eBayItemList
+    # itemList = itemList[0:min(10, len(itemList))] + eBayItemList
 
-    shuffle(itemList)
+    # shuffle(itemList)
+
+    print(len(itemList))
 
     nitemList = []
     for i in range(4):
