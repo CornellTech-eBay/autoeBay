@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from random import shuffle
+import json
 
 import pickle
 import csv
@@ -62,12 +63,19 @@ def index(request):
 
     # shuffle(itemList)
 
-    print(len(itemList))
+    print('length of lists of items: ', len(itemList))
 
     nitemList = []
     for i in range(4):
         nitemList.append(itemList[i*5:(i+1)*5])
     itemList = nitemList
+    print('length of lists of items: ', len(itemList))
+    
+    url_list = []
+    for lists in itemList:
+        url_list.extend([item['viewItemURL'] for item in lists])
+    print (url_list)
+    # print (itemList[0][0]['viewItemURL'])
 
     context = {'itemList': itemList}
     return render(request, 'store/index.html', context)
